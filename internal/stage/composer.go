@@ -43,9 +43,9 @@ func (LayerComposer) Build(settings model.Settings, gesture model.Gesture, stren
 
 func (composer LayerComposer) ComposeLayers(layers []model.BeamLayer, gesture model.Gesture, ended bool) []model.BeamLayer {
 	composed := model.CloneLayers(layers)
-	if gesture == model.GestureFist && ended && len(composed) > 0 {
-		composed = composed[:len(composed)-1]
-	}
+	// Gesture state transitions (including a fist release) must retain every
+	// configured beam layer, so the display never loses a halo/beam layer.
+	_ = ended
 	if gesture == model.GestureRing {
 		composed = addRings(composed)
 	}
