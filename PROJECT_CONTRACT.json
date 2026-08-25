@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "metrics": {
+    "production_loc": 2353,
+    "production_files": 30,
+    "production_packages": 10,
+    "test_files": 9,
+    "production_functions": 193,
+    "decision_points": 325
+  },
+  "persistence": {
+    "module": "go.etcd.io/bbolt",
+    "entities": [
+      "ShowRecord",
+      "GestureRecord",
+      "LayerSnapshot",
+      "SettingRecord",
+      "AuditEntry"
+    ],
+    "reopen_test": "TestPersistenceSurvivesReopen"
+  },
+  "workflows": [
+    {
+      "steps": [
+        "接收新建演出请求",
+        "校验名称与灯光设置",
+        "创建粒子和光束层并写入存储",
+        "返回演出工作流回执"
+      ],
+      "test": "TestPrimaryWorkflow"
+    },
+    {
+      "steps": [
+        "读取演出状态",
+        "转换鼠标或手势输入",
+        "合成扇形或光柱层并推进粒子",
+        "返回可渲染帧与审计结果"
+      ],
+      "test": "TestSecondaryWorkflow"
+    },
+    {
+      "steps": [
+        "准备确定性手势编排",
+        "按时间线执行多层光效",
+        "保存手势与层快照",
+        "完成关闭和重新打开后的交付"
+      ],
+      "test": "TestTertiaryWorkflow"
+    }
+  ]
+}
